@@ -21,7 +21,7 @@ export const globalContent = ref({
 
 
 // ProgressPlay data:
-export const WHITELABEL_ID = 212;
+export const WHITELABEL_ID = 34;
 export const PP_API_URL = 'https://prd-api.casino-pp.net/CmSHelper/';
 const PP_PROMOTIONS_API = `${PP_API_URL}GetPromotionsInfo?whitelabelId=${WHITELABEL_ID}&country=`;
 const PP_LOBBY_LINK = 'https://betdukes.casino-pp.net/';

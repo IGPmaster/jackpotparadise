@@ -23,7 +23,8 @@
       </div>
 
       <main class="container mx-auto text-center py-4">
-        <h1 class="site_heading text-primary text-lg md:text-2xl lg:text-4xl font-bold">betDukes - Your Casino!</h1>
+        <h1 class="site_heading text-primary text-lg md:text-2xl lg:text-4xl font-bold">JackpotParadise - Your Casino!
+        </h1>
       </main>
 
 
