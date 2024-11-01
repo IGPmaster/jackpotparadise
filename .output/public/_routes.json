@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/_nuxt/*",
+    "/_redirects",
+    "/bd-faviconV2.png",
+    "/favicon.ico",
+    "/index.html",
+    "/newGameImg.jpg",
+    "/all-games/index.html",
+    "/casino-games/index.html",
+    "/compliance/index.html",
+    "/jackpot-games/index.html",
+    "/live-games/index.html",
+    "/popular-games/index.html",
+    "/promotions/index.html",
+    "/scratchcards/index.html",
+    "/slot-games/index.html",
+    "/compliance/aboutus/index.html",
+    "/compliance/contact/index.html",
+    "/compliance/deposits/index.html",
+    "/compliance/faq/index.html",
+    "/compliance/payouts/index.html",
+    "/compliance/privacy/index.html",
+    "/compliance/responsible/index.html",
+    "/compliance/terms/index.html",
+    "/compliance/withdrawals/index.html"
+  ]
+}

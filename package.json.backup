@@ -1,0 +1,23 @@
+{
+  "generate": "nuxi generate",
+  "name": "hippozino",
+  "private": true,
+  "scripts": {
+    "build": "nuxi build",
+    "dev": "nuxi dev",
+    "generate": "nuxi generate",
+    "preview": "nuxi preview",
+    "postinstall": "nuxi prepare",
+    "postbuild": "echo '/* /index.html 200' > dist/_redirects"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.6.6",
+    "@types/node": "^18",
+    "nuxi": "^3.11.1",
+    "nuxt": "^3.11.2"
+  },
+  "dependencies": {
+    "@gtm-support/vue-gtm": "^2.0.0",
+    "wrangler": "^3.0.0"
+  }
+}

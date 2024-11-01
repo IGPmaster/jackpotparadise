@@ -1,0 +1,281 @@
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700&display=swap');
+
+/* Material Icons Font */
+@font-face {
+    font-family: "Material Icons";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v98/flUhRq6tzZclQEJ-Vdg-IuiaDsNZ.ttf) format("truetype");
+}
+
+/* Base Styles */
+body {
+    font-family: "Poppins", sans-serif;
+    height: 100%;
+    @apply bg-tertiary_dark;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    line-height: 1;
+}
+
+p {
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Heading Styles with Tailwind */
+h1 {
+    @apply mb-4 text-4xl leading-none tracking-tight text-primary lg:text-6xl;
+    font-size: 4.2rem;
+    line-height: 110%;
+    margin: 2.1rem 0 1.68rem 0;
+}
+
+h2 {
+    @apply text-4xl text-primary;
+    font-size: 3rem;
+    line-height: 110%;
+}
+
+h3 {
+    @apply text-3xl text-primary;
+    font-size: 2.6rem;
+    line-height: 110%;
+    margin: 1.46rem 0 1.168rem 0;
+}
+
+h4 {
+    @apply text-2xl text-white;
+    font-size: 2.28rem;
+    line-height: 110%;
+    margin: 1.14rem 0 0.912rem 0;
+}
+
+h5 {
+    @apply text-xl text-white;
+    font-size: 1.64rem;
+    line-height: 110%;
+}
+
+h6 {
+    @apply text-lg text-white;
+    font-size: 1rem;
+    line-height: 110%;
+    margin: 0.5rem 0 0.4rem 0;
+}
+
+/* Button Components */
+.compliance-btn {
+    @apply border-gray-200 cursor-pointer uppercase border px-3 py-1 rounded text-sm text-gray-600 hover:bg-slate-50 transition ease-in-out;
+}
+
+.cas-btn {
+    @apply uppercase py-2 flex items-center justify-center gap-4 text-xs tracking-wider text-gray-50 rounded cursor-pointer border font-light;
+}
+
+.login-btn {
+    @apply text-white uppercase font-semibold border-2 border-white bg-primary leading-none py-2 px-10 rounded flex justify-center cursor-pointer;
+}
+
+.reg-btn {
+    @apply text-white uppercase font-semibold border-2 border-white bg-secondary leading-none py-2 px-10 rounded flex justify-center cursor-pointer;
+}
+
+/* Loading Spinner */
+.spinner {
+    animation: rotate 2s linear infinite;
+    z-index: 2;
+    position: absolute;
+    margin-top: 100px !important;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    width: 50px;
+    height: 50px;
+}
+
+.spinner .path {
+    stroke: white;
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+}
+
+/* Animation Keyframes */
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+}
+
+/* Layout and Components */
+.wrapper {
+    background-color: #212633;
+    padding-top: 4rem;
+}
+
+.loading-placeholder {
+    min-height: 110vh;
+}
+
+/* Material Icons */
+.material-icons {
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+}
+
+/* Game Display Components */
+.show {
+    float: left;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    cursor: default;
+    background: transparent;
+    display: block;
+    margin-bottom: 0em;
+    min-width: 100%;
+    border-radius: 0;
+}
+
+.show .mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: all 0.4s ease-in-out;
+}
+
+.show-first img {
+    transition: all 0.2s linear;
+}
+
+.show-first:hover img {
+    transform: scale(1.2);
+}
+
+.show-first:hover .mask {
+    opacity: 1;
+}
+
+/* Content Areas */
+.content-area h1,
+.content-area h2,
+.content-area h3,
+.content-area h4,
+.content-area h5,
+.content-area h6 {
+    color: darkslategrey;
+}
+
+.content-area h1 {
+    font-weight: bold;
+}
+
+.content-area p,
+.content-area p span,
+.disclaimer {
+    color: rgb(15, 27, 27);
+}
+
+/* Footer */
+.footer_icons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    align-items: center;
+    justify-items: center;
+}
+
+/* Background Colors */
+.bgr_red {
+    background-color: #AF2117;
+}
+
+.bgr_white {
+    background-color: #ffffff;
+}
+
+.bgr_blue {
+    background-color: #161c36 !important;
+}
+
+.cta_button {
+    background: linear-gradient(-305deg, #185aaf, #18a6af) !important;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .loading-placeholder {
+        min-height: 50vw;
+    }
+
+    .footer_icons {
+        grid-template-columns: repeat(6, 1fr);
+        align-items: center;
+    }
+}
+
+@media (min-width: 992px) {
+    .loading-placeholder {
+        min-height: 20vw;
+    }
+}
+
+@media (min-width: 1920px) {
+    .loading-placeholder {
+        min-height: 20vw;
+    }
+}
+
+@media (min-width: 2400px) {
+    .loading-placeholder {
+        min-height: 18vw;
+    }
+}
