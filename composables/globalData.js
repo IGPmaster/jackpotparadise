@@ -24,12 +24,12 @@ export const globalContent = ref({
 export const WHITELABEL_ID = 34;
 export const PP_API_URL = 'https://prd-api.casino-pp.net/CmSHelper/';
 const PP_PROMOTIONS_API = `${PP_API_URL}GetPromotionsInfo?whitelabelId=${WHITELABEL_ID}&country=`;
-const PP_LOBBY_LINK = 'https://betdukes.casino-pp.net/';
+const PP_LOBBY_LINK = 'https://jackpotparadise.casino-pp.net/';
 //const KV_GAMES = `https://content.progressplay.net/api23/api/game?whitelabelId=${WHITELABEL_ID}`; // Test API
 
 
 // WP-REST-API:
-const WP_API = 'https://headless.betdukes.com/wp-json/wp/v2/';
+const WP_API = 'http://headless.jackpotparadise.com/wp-json/wp/v2/';
 
 //CloudFlare Workers KV data:
 export const KV_GAMES = 'https://access-ppgames.tech1960.workers.dev/';
