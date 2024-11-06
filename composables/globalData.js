@@ -29,7 +29,7 @@ const PP_LOBBY_LINK = 'https://jackpotparadise.casino-pp.net/';
 
 
 // WP-REST-API:
-const WP_API = 'http://headless.jackpotparadise.com/wp-json/wp/v2/';
+const WP_API = 'https://headless.jackpotparadise.com/wp-json/wp/v2/';
 
 //CloudFlare Workers KV data:
 export const KV_GAMES = 'https://access-ppgames.tech1960.workers.dev/';
