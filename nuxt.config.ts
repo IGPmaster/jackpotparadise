@@ -34,7 +34,7 @@ export default defineNuxtConfig({
         { name: 'description', content: "Enjoy seamless mobile gaming with JackpotParadise's mobile slots." }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/bd-faviconV2.png' },
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { 
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
