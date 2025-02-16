@@ -4,7 +4,7 @@
 			<div class="container grid grid-cols-1 lg:grid-cols-8 lg:gap-10 items-center mx-auto p-4">
 				<div class="col-span-full lg:col-span-6">
 					<p class="gamesSectionHead text-center lg:text-left text-3xl text-primary py-4 px-4">{{
-						msgTranslate.live_games }}</p>
+						msgTranslate?.live_games || 'Live Games' }}</p>
 					<div v-for="promo in promotionsPosts" :key="promo.id">
 						<div class="info_content text-primary font-extralight py-5 px-4">{{ promo.acf.live_games_info }}
 						</div>
@@ -14,7 +14,7 @@
 					<div class="flex justify-between items-center">
 						<a :href="regLink"
 							class="bg-secondary_bg w-full rounded-md py-3 flex text-secondary hover:text-primary hover:bg-tertiary_dark uppercase cursor-pointer transition ease-in-out duration-500 hover:scale-110">
-							<span class="text-center w-full">{{ msgTranslate.sign_up }}</span>
+							<span class="text-center w-full">{{ msgTranslate?.sign_up || 'Sign Up' }}</span>
 							<i class="material-icons items-center pr-2 font-extralight">arrow_forward</i>
 						</a>
 					</div>
@@ -58,6 +58,16 @@ const { fetch, error, $fetchState } = useFetch(async () => {
 	await fetchPromotions();
 	await loadTranslations(loadLang());
 });
+
+// Add async data loading
+await useAsyncData('translations', async () => {
+	try {
+		await loadLang();
+	} catch (error) {
+		console.error('Error loading translations:', error);
+	}
+});
+
 // Set page-specific meta tags
 useHead({
 	title: 'Live Games - Hippozino',

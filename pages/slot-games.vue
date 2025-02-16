@@ -4,7 +4,7 @@
 			<div class="container grid grid-cols-1 lg:grid-cols-8 lg:gap-8 items-center mx-auto">
 				<div class="col-span-full lg:col-span-6">
 					<p class="gamesSectionHead text-primary text-center lg:text-left p-4 text-3xl text-bold">{{
-						msgTranslate.slot_games }}</p>
+						msgTranslate?.slot_games || 'Slot Games' }}</p>
 					<div v-for="promo in promotionsPosts" :key="promo.id">
 						<div class="info_content text-primary font-extralight text-lg py-5 px-4">{{
 							promo.acf.slot_games_info }}
@@ -15,7 +15,7 @@
 					<div class="flex justify-between items-center">
 						<NuxtLink to="all-games"
 							class="bg-secondary_bg w-full rounded-md py-3 flex text-secondary hover:text-primary hover:bg-tertiary_dark uppercase cursor-pointer transition ease-in-out duration-500 hover:scale-110">
-							<span class="text-center w-full">{{ msgTranslate.see_more }}</span>
+							<span class="text-center w-full">{{ msgTranslate?.see_more || 'See More' }}</span>
 							<i class="material-icons items-center pr-2 font-extralight">arrow_forward</i>
 						</NuxtLink>
 					</div>
@@ -70,6 +70,15 @@ useHead({
 		{ hid: 'description', name: 'description', content: 'Explore the best slot games available at Hippozino!' },
 		{ name: 'keywords', content: 'slots, games, casino, Hippozino' }
 	]
+});
+
+// Add async data loading
+await useAsyncData('translations', async () => {
+	try {
+		await loadLang();
+	} catch (error) {
+		console.error('Error loading translations:', error);
+	}
 });
 </script>
 

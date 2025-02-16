@@ -7,52 +7,52 @@
             <li>
               <NuxtLink to="/"
                 class="uppercase font-light text-sm text-zinc-200 py-2 px-4 rounded hover:bg-[#323131] transition ease-in-out">
-                {{ msgTranslate.home }}</NuxtLink>
+                {{ msgTranslate?.home || 'Home' }}</NuxtLink>
             </li>
             <li>
               <NuxtLink to="/promotions"
                 class="uppercase font-light text-sm text-zinc-200 py-2 px-4 bg-stone-800 rounded hover:bg-[#323131] transition ease-in-out">
-                {{ msgTranslate.promotions }}</NuxtLink>
+                {{ msgTranslate?.promotions || 'Promotions' }}</NuxtLink>
             </li>
             <li>
               <NuxtLink to="/compliance"
                 class="uppercase font-light text-sm text-zinc-200 py-2 px-4 bg-stone-800 rounded hover:bg-[#323131] transition ease-in-out">
-                {{ msgTranslate.legal }}</NuxtLink>
+                {{ msgTranslate?.legal || 'Legal' }}</NuxtLink>
             </li>
             <li>
               <NuxtLink to="/all-games"
                 class="uppercase font-light text-sm text-zinc-200 py-2 px-4 bg-stone-800 rounded hover:bg-[#323131] transition ease-in-out">
-                {{ msgTranslate.all_games }}</NuxtLink>
+                {{ msgTranslate?.all_games || 'All Games' }}</NuxtLink>
             </li>
             <li>
               <NuxtLink to="/casino-games"
                 class="uppercase font-light text-sm text-zinc-200 py-2 px-4 bg-stone-800 rounded hover:bg-[#323131] transition ease-in-out">
-                {{ msgTranslate.casino_games }}</NuxtLink>
+                {{ msgTranslate?.casino_games || 'Casino Games' }}</NuxtLink>
             </li>
             <li>
               <NuxtLink to="/jackpot-games"
                 class="uppercase font-light text-sm text-zinc-200 py-2 px-4 bg-stone-800 rounded hover:bg-[#323131] transition ease-in-out">
-                {{ msgTranslate.jackpot_games }}</NuxtLink>
+                {{ msgTranslate?.jackpot_games || 'Jackpot Games' }}</NuxtLink>
             </li>
             <li>
               <NuxtLink to="/live-games"
                 class="uppercase font-light text-sm text-zinc-200 py-2 px-4 bg-stone-800 rounded hover:bg-[#323131] transition ease-in-out">
-                {{ msgTranslate.live_games }}</NuxtLink>
+                {{ msgTranslate?.live_games || 'Live Games' }}</NuxtLink>
             </li>
             <li>
               <NuxtLink to="/popular-games"
                 class="uppercase font-light text-sm text-zinc-200 py-2 px-4 bg-stone-800 rounded hover:bg-[#323131] transition ease-in-out">
-                {{ msgTranslate.popular_games }}</NuxtLink>
+                {{ msgTranslate?.popular_games || 'Popular Games' }}</NuxtLink>
             </li>
             <li>
               <NuxtLink to="/scratchcards"
                 class="uppercase font-light text-sm text-zinc-200 py-2 px-4 bg-stone-800 rounded hover:bg-[#323131] transition ease-in-out">
-                {{ msgTranslate.scratchcards_games }}</NuxtLink>
+                {{ msgTranslate?.scratchcards_games || 'Scratchcard Games' }}</NuxtLink>
             </li>
             <li>
               <NuxtLink to="/slot-games"
                 class="uppercase font-light text-sm text-zinc-200 py-2 px-4 bg-stone-800 rounded hover:bg-[#323131] transition ease-in-out">
-                {{ msgTranslate.slot_games }}</NuxtLink>
+                {{ msgTranslate?.slot_games || 'Slot Games' }}</NuxtLink>
             </li>
           </ul>
         </div>
@@ -62,31 +62,31 @@
         <div class="container mx-auto footerContainer bg-neutral-50 rounded-md p-10">
           <ul class="container mx-auto flex list-none flex-wrap text-lg justify-center gap-6 py-8 text-gray-800">
             <li>
-              <NuxtLink to="/compliance/aboutus" class="compliance-btn">{{ msgTranslate.aboutus }}</NuxtLink>
+              <NuxtLink to="/compliance/aboutus" class="compliance-btn">{{ msgTranslate?.aboutus || 'About Us' }}</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/compliance/withdrawals" class="compliance-btn">{{ msgTranslate.withdrawals }}</NuxtLink>
+              <NuxtLink to="/compliance/withdrawals" class="compliance-btn">{{ msgTranslate?.withdrawals || 'Withdrawals' }}</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/compliance/deposits" class="compliance-btn">{{ msgTranslate.deposits }}</NuxtLink>
+              <NuxtLink to="/compliance/deposits" class="compliance-btn">{{ msgTranslate?.deposits || 'Deposits' }}</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/compliance/contact" class="compliance-btn">{{ msgTranslate.contact }}</NuxtLink>
+              <NuxtLink to="/compliance/contact" class="compliance-btn">{{ msgTranslate?.contact || 'Contact' }}</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/compliance/privacy" class="compliance-btn">{{ msgTranslate.privacy }}</NuxtLink>
+              <NuxtLink to="/compliance/privacy" class="compliance-btn">{{ msgTranslate?.privacy || 'Privacy' }}</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/compliance/responsible" class="compliance-btn">{{ msgTranslate.responsible }}</NuxtLink>
+              <NuxtLink to="/compliance/responsible" class="compliance-btn">{{ msgTranslate?.responsible || 'Responsible Gaming' }}</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/compliance/faq" class="compliance-btn">{{ msgTranslate.faq }}</NuxtLink>
+              <NuxtLink to="/compliance/faq" class="compliance-btn">{{ msgTranslate?.faq || 'FAQ' }}</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/compliance/payouts" class="compliance-btn">{{ msgTranslate.payouts }}</NuxtLink>
+              <NuxtLink to="/compliance/payouts" class="compliance-btn">{{ msgTranslate?.payouts || 'Payouts' }}</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/compliance/terms" class="compliance-btn">{{ msgTranslate.terms }}</NuxtLink>
+              <NuxtLink to="/compliance/terms" class="compliance-btn">{{ msgTranslate?.terms || 'Terms' }}</NuxtLink>
             </li>
           </ul>
           <div v-for="icon in footerIcons" :key="icon.Name">
@@ -106,13 +106,13 @@
         <div class="grid grid-cols-2">
           <div class="w-full bg-[#91D342] flex justify-center py-3">
             <a :href="loginLink" class="flex items-center gap-4 text-[#313131] font-semibold">
-              {{ msgTranslate.login }}
+              {{ msgTranslate?.login || 'Login' }}
               <i class="material-icons">arrow_forward</i>
             </a>
           </div>
           <div class="w-full bg-[#3598FB] flex justify-center">
             <a :href="regLink" class="flex items-center gap-4 text-[#313131] font-semibold">
-              {{ msgTranslate.sign_up }}
+              {{ msgTranslate?.sign_up || 'Sign Up' }}
               <i class="material-icons">security</i>
             </a>
           </div>
@@ -128,11 +128,21 @@
 import { ref, onMounted } from 'vue';
 
 import { fetchFooterIcons, fetchFooterText } from '~/composables/globalData.js';
+import { msgTranslate, loadLang } from '~/composables/globalData';
 
 const { fetch, error, $fetchState } = useFetch(async () => {
   //countriesData.value = await fetchCountriesData();
   await fetchFooterIcons(lang.value);
   await fetchFooterText(lang.value);
+});
+
+// Add async data loading
+await useAsyncData('translations', async () => {
+  try {
+    await loadLang();
+  } catch (error) {
+    console.error('Error loading translations:', error);
+  }
 });
 
 </script>

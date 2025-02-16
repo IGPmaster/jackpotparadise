@@ -7,7 +7,7 @@
                     <div class="col-span-full lg:col-span-6">
                         <!-- Fixed text-bold to font-bold -->
                         <p class="gamesSectionHead text-primary text-center lg:text-left p-4 text-3xl font-bold">
-                            {{ msgTranslate.new_games }}
+                            {{ msgTranslate?.new_games || 'New Games' }}
                         </p>
                         <div v-for="promo in promotionsPosts" :key="promo.id">
                             <!-- Removed unnecessary nested div -->
@@ -20,7 +20,7 @@
                         <div class="flex justify-between items-center">
                             <NuxtLink to="all-games"
                                 class="w-full rounded-md py-3 flex items-center justify-center bg-secondary_bg text-secondary uppercase cursor-pointer transition-all ease-in-out duration-500 hover:text-primary hover:bg-tertiary_dark hover:scale-110">
-                                <span class="text-center">{{ msgTranslate.see_more }}</span>
+                                <span class="text-center">{{ msgTranslate?.see_more || 'See More' }}</span>
                                 <i class="material-icons pl-2 font-extralight">arrow_forward</i>
                             </NuxtLink>
                         </div>
@@ -68,11 +68,11 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-10">
             <div class="flex flex-col sm:flex-row items-center justify-between bg-tertiary_dark p-5 sm:p-10 rounded-sm">
                 <div class="text-primary font-bold text-base md:text-2xl xl:text-4xl mb-4 sm:mb-0">
-                    {{ msgTranslate.claim }}
+                    {{ msgTranslate?.claim || 'Claim' }}
                 </div>
                 <a :href="regLink"
                     class="inline-block py-2 px-4 md:px-10 font-semibold rounded text-sm bg-secondary_bg text-secondary hover:opacity-90 transition-opacity duration-300 text-md md:text-xl xl:text-3xl">
-                    {{ msgTranslate.sign_up }}
+                    {{ msgTranslate?.sign_up || 'Sign Up' }}
                 </a>
             </div>
         </div>
@@ -82,13 +82,14 @@
 <script setup>
 import { ref, onMounted, defineEmits } from 'vue';
 const loading = ref(true);
-import { newGames, msgTranslate, regLink, loginLink } from '~/composables/globalData';
+import { newGames, msgTranslate, loadLang, regLink, loginLink } from '~/composables/globalData';
 
 const emit = defineEmits(['loaded']);
 
 onMounted(async () => {
     try {
         await fetchGames();
+        await loadLang();
     } catch (error) {
         console.error('Error fetching promotions:', error);
     } finally {
