@@ -25,6 +25,7 @@ export default defineNuxtConfig({
   plugins: [
     '~/plugins/language.js',
     '~/plugins/hreflang.js',
+    '~/plugins/vue-gtm.client.js',
   ],
   modules: ['@nuxtjs/tailwindcss'],
   app: {

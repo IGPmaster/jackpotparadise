@@ -12,10 +12,11 @@
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@types/node": "^22",
     "nuxi": "^3.15.0",
-    "nuxt": "^3.13.2"
+    "nuxt": "^3.6.0"
   },
   "dependencies": {
     "@gtm-support/vue-gtm": "^3.1.0",
-    "wrangler": "^3.83.0"
+    "esbuild": "^0.25.0",
+    "wrangler": "^3.109.3"
   }
 }

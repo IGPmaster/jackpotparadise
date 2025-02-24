@@ -64,7 +64,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-
+import CookieConsent from '~/components/CookieConsent.vue';
 import { msgTranslate, regLink, loginLink } from '~/composables/globalData';
 
 
