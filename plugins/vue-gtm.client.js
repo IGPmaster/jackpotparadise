@@ -19,6 +19,9 @@ export default defineNuxtPlugin((nuxtApp) => {
             'security_storage': 'granted'
         });
 
+        // Set flag to track if GTM is initialized
+        window.gtmInitialized = window.gtmInitialized || false;
+
         // Create GTM instance
         const gtmInstance = createGtm({
             id: SITE_CONFIG.gtmId,
@@ -26,7 +29,7 @@ export default defineNuxtPlugin((nuxtApp) => {
             compatibility: false,
             enabled: true,
             debug: process.env.NODE_ENV !== 'production',
-            loadScript: false,
+            loadScript: false, // We'll handle script loading ourselves
             vueRouter: useRouter(),
             trackOnNextTick: false,
         });
@@ -36,7 +39,21 @@ export default defineNuxtPlugin((nuxtApp) => {
 
         // Function to initialize GTM
         window.initializeGTM = () => {
+            // Prevent multiple initializations
+            if (window.gtmInitialized) {
+                console.log('GTM already initialized, skipping...');
+                return;
+            }
+
             try {
+                // Check if GTM script already exists
+                const existingScript = document.querySelector(`script[src*="googletagmanager.com/gtm.js?id=${SITE_CONFIG.gtmId}"]`);
+                if (existingScript) {
+                    console.log('GTM script already exists, skipping script creation');
+                    window.gtmInitialized = true;
+                    return;
+                }
+
                 // Load GTM script
                 const script = document.createElement('script');
                 script.async = true;
@@ -45,6 +62,7 @@ export default defineNuxtPlugin((nuxtApp) => {
                 // Add success handler
                 script.onload = () => {
                     console.log('GTM script loaded successfully');
+                    window.gtmInitialized = true;
                     // Push initial pageview after script loads
                     window.dataLayer.push({
                         'event': 'pageview',
@@ -59,16 +77,20 @@ export default defineNuxtPlugin((nuxtApp) => {
                 
                 document.head.appendChild(script);
 
-                // Add noscript iframe for better tracking coverage
-                const noscript = document.createElement('noscript');
-                const iframe = document.createElement('iframe');
-                iframe.src = `https://www.googletagmanager.com/ns.html?id=${SITE_CONFIG.gtmId}`;
-                iframe.height = '0';
-                iframe.width = '0';
-                iframe.style.display = 'none';
-                iframe.style.visibility = 'hidden';
-                noscript.appendChild(iframe);
-                document.body.appendChild(noscript);
+                // Check if iframe already exists
+                const existingIframe = document.querySelector(`iframe[src*="googletagmanager.com/ns.html?id=${SITE_CONFIG.gtmId}"]`);
+                if (!existingIframe) {
+                    // Add noscript iframe for better tracking coverage
+                    const noscript = document.createElement('noscript');
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `https://www.googletagmanager.com/ns.html?id=${SITE_CONFIG.gtmId}`;
+                    iframe.height = '0';
+                    iframe.width = '0';
+                    iframe.style.display = 'none';
+                    iframe.style.visibility = 'hidden';
+                    noscript.appendChild(iframe);
+                    document.body.appendChild(noscript);
+                }
             } catch (error) {
                 console.warn('Error initializing GTM:', error);
             }
