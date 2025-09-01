@@ -261,6 +261,12 @@ export async function loadTranslations() {
 }
 
 export async function fetchApiPromotions() {
+  // Skip promotions API calls during prerendering (promotions should be client-side only)
+  if (process.server && process.env.NITRO_PRERENDER) {
+    console.log('🎁 PROMOTIONS: Skipping promotions fetch during prerendering');
+    return;
+  }
+
   try {
     console.log('🎁 UNIFIED: Starting fetchApiPromotions()');
     console.log('🔍 UNIFIED: lang.value =', lang.value);
