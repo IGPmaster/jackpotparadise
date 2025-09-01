@@ -138,13 +138,7 @@ function getFallbackCountry(geoData) {
 }
 
 export async function loadLang() {
-  // 🚨 SERVER-SIDE SAFE: Skip GEO API calls during build to prevent deployment failures
-  if (process.server && process.env.NODE_ENV !== 'development') {
-    console.log('🏗️ BUILD: Skipping GEO API call during server-side build, using default lang');
-    lang.value = 'EN'; // Default to EN for build
-    return;
-  }
-  
+
   if (typeof window !== 'undefined') {
     let langValue;
     let geoData = null;
@@ -273,13 +267,7 @@ export async function fetchApiPromotions() {
     console.log('🔍 UNIFIED: WHITELABEL_ID =', WHITELABEL_ID);
     console.log('🔍 UNIFIED: process.client =', process.client);
     
-    // 💻 SERVER BUILD FIX: Skip API calls during build to prevent 403 errors
-    if (!process.client && process.env.NODE_ENV !== 'development') {
-      console.log('💻 SERVER: Skipping promotions API call during build');
-      pp_promotions.value = [];
-      return;
-    }
-    
+
     // Use unified proxy for client-side calls, direct API for server-side
     const apiUrl = process.client
       ? `https://access-content-pp.tech1960.workers.dev/?type=promotions&whitelabelId=${WHITELABEL_ID}&country=${lang.value}`
@@ -357,23 +345,7 @@ export async function fetchFilterByName() {
 }
 
 export async function fetchGames() {
-  // 🚨 SERVER-SIDE SAFE: Skip API calls during build to prevent deployment failures
-  if (process.server && process.env.NODE_ENV !== 'development') {
-    console.log('🏗️ BUILD: Skipping games API call during server-side build');
-    // Set empty arrays for build
-    games.value = [];
-    newGames.value = [];
-    popularGames.value = [];
-    jackpotGames.value = [];
-    casinoGames.value = [];
-    slotGames.value = [];
-    scratchGames.value = [];
-    liveGames.value = [];
-    blackjackGames.value = [];
-    rouletteGames.value = [];
-    return;
-  }
-  
+
   try {
     // 1. Check cache FIRST (before Worker call)
     const now = Date.now();
@@ -584,12 +556,7 @@ export async function handleParameter(parameterName) {
 
 // 📄 UNIFIED Content API with CloudFlare Worker proxy and caching
 export async function fetchCachedContent(code, country = lang.value) {
-  // 🚨 SERVER-SIDE SAFE: Skip API calls during build to prevent deployment failures
-  if (process.server && process.env.NODE_ENV !== 'development') {
-    console.log('🏗️ BUILD: Skipping content API call during server-side build for code:', code);
-    return ''; // Return empty string for build
-  }
-  
+
   // Validate code parameter
   if (!code || code === 'undefined' || typeof code !== 'string') {
     console.error('❌ CONTENT: Invalid code parameter:', { code, type: typeof code });
@@ -654,14 +621,7 @@ export async function fetchSupportedCountries() {
 
 // 🚀 UNIFIED Footer Content API with CloudFlare Worker proxy
 export async function fetchFooterContent(lang) {
-  // 🚨 SERVER-SIDE SAFE: Skip API calls during build to prevent deployment failures
-  if (process.server && process.env.NODE_ENV !== 'development') {
-    console.log('🏗️ BUILD: Skipping footer API call during server-side build');
-    footerIcons.value = [];
-    footerText.value = [];
-    return;
-  }
-  
+
   const cacheKey = `footer_${lang}`;
   
   if (footerContentCache.has(cacheKey)) {
@@ -695,14 +655,7 @@ export async function fetchFooterContent(lang) {
       footerIcons.value = [];
       footerText.value = [];
       
-      // Try to fetch if possible, but don't fail the build
-      try {
-        await fetchFooterIconsServer(lang);
-        await fetchFooterTextServer(lang);
-      } catch (serverError) {
-        console.warn('SERVER: Footer content fetch failed, using empty arrays:', serverError.message);
-        // Keep empty arrays to prevent build failure
-      }
+      // Footer content will be loaded on client-side
     }
   } catch (error) {
     console.error('❌ UNIFIED: Error fetching footer content:', error);
@@ -711,52 +664,7 @@ export async function fetchFooterContent(lang) {
   }
 }
 
-// Server-side fallback functions
-async function fetchFooterIconsServer(lang) {
-  try {
-    // Use proper server-side API endpoint
-    const response = await fetch(`${PP_API_URL}InfoContent?whitelabelId=${WHITELABEL_ID}&code=footericon`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (compatible; JackpotParadise/1.0)'
-      }
-    });
-    
-    if (!response.ok) {
-      throw new Error(`Footer icons API failed: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    footerIcons.value = data || [];
-  } catch (error) {
-    console.error('Error fetching footer icons:', error);
-    footerIcons.value = [];
-  }
-}
 
-async function fetchFooterTextServer(lang) {
-  try {
-    // Use proper server-side API endpoint
-    const response = await fetch(`${PP_API_URL}InfoContent?whitelabelId=${WHITELABEL_ID}&code=footertext`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (compatible; JackpotParadise/1.0)'
-      }
-    });
-    
-    if (!response.ok) {
-      throw new Error(`Footer text API failed: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    footerText.value = data || [];
-  } catch (error) {
-    console.error('Error fetching footer text:', error);
-    footerText.value = [];
-  }
-}
 
 // Legacy functions for backward compatibility
 export async function fetchFooterIcons(lang) {

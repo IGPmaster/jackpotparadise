@@ -1,6 +1,6 @@
 {
-  "date": "2025-09-01T21:46:19.189Z",
-  "preset": "cloudflare-pages",
+  "date": "2025-09-01T21:52:07.326Z",
+  "preset": "nitro-prerender",
   "framework": {
     "name": "nuxt",
     "version": "3.16.2"
@@ -9,8 +9,7 @@
     "nitro": "2.11.8"
   },
   "commands": {
-    "preview": "npx wrangler --cwd ./ pages dev",
-    "deploy": "npx wrangler --cwd ./ pages deploy"
+    "preview": "npx serve ./public"
   },
   "config": {}
 }
