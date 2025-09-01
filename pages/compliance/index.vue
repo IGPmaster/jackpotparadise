@@ -27,31 +27,33 @@ function updateCode(key, globalContent) {
 
 async function fetchContent(code) {
     try {
-        const response = await fetch(
-            `${PP_API_URL}GetInfoContentByCode?whitelabelId=${WHITELABEL_ID}&country=${lang.value}&code=${code}`
-        );
-        const data = await response.json();
-        return data[0].Html; // Return the Html content instead of updating the ref
+        // Use the unified cached content function with CloudFlare Worker proxy
+        return await fetchCachedContent(code, lang.value);
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching compliance content:', error);
+        return '';
     }
 }
 
 import { ref } from 'vue';
-import { msgTranslate, loadLang, globalContent } from '~/composables/globalData';
+import { msgTranslate, loadLang, globalContent, fetchCachedContent, PP_API_URL, WHITELABEL_ID, lang } from '~/composables/globalData';
 
 const htmlContent = ref('');
 
-(async () => {
-    htmlContent.value = await fetchContent('aboutus'); // Set the htmlContent.value here
-    await useAsyncData('translations', async () => {
-        try {
-            await loadLang();
-        } catch (error) {
-            console.error('Error loading translations:', error);
-        }
-    });
-})();
+// Use proper async data loading
+await useAsyncData('compliance-content', async () => {
+    await loadLang(); // Ensure lang is loaded first
+    htmlContent.value = await fetchContent('aboutus');
+    return htmlContent.value;
+});
+
+await useAsyncData('translations', async () => {
+    try {
+        await loadLang();
+    } catch (error) {
+        console.error('Error loading translations:', error);
+    }
+});
 
 const handleClick = async (key) => {
     const code = updateCode(key, globalContent.value); // Use globalContent.value here
