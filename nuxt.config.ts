@@ -8,13 +8,17 @@ export default defineNuxtConfig({
       publicDir: '.output/public'
     },
     prerender: {
-      crawlLinks: false,    // Disable crawling to prevent prerendering game URLs
-      routes: ['/']         // Add this to ensure root is prerendered
+      crawlLinks: true,     // Add this to prerender linked pages
+      routes: ['/'],        // Add this to ensure root is prerendered
+      failOnError: false    // More resilient prerendering
+    },
+    // 🎯 SILVER BULLET: Enable CloudFlare Functions for same-origin API calls
+    routeRules: {
+      '/api/**': { prerender: false },
     }
   },
   // Use ISR (Incremental Static Regeneration) for all routes
   routeRules: {
-    '/api/**': { prerender: false }, // CloudFlare Functions - disable prerendering
     '/withdrawals-info': { prerender: false }, // Exclude missing page from prerender
     '/excluded-games': { prerender: false }, // Exclude missing page from prerender
     '/**': { isr: true }
@@ -45,4 +49,6 @@ export default defineNuxtConfig({
       ],
     }
   },
+
+  compatibilityDate: '2025-04-10'
 });
