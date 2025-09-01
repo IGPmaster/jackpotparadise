@@ -16,6 +16,8 @@ export default defineNuxtConfig({
   // Use ISR (Incremental Static Regeneration) for all routes
   routeRules: {
     '/api/**': { prerender: false }, // CloudFlare Functions - disable prerendering
+    '/withdrawals-info': { prerender: false }, // Exclude missing page from prerender
+    '/excluded-games': { prerender: false }, // Exclude missing page from prerender
     '/**': { isr: true }
   },
   // Add this experimental feature for better Cloudflare Pages compatibility

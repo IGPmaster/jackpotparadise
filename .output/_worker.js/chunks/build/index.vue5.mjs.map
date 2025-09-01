@@ -1,0 +1,1 @@
+{"version":3,"file":"index.vue5.mjs","sources":["../../../../pages/lp/halloween/index.vue"],"sourcesContent":null,"names":["useFetch","fetchApiPromotions","useHead","title","meta","hid","name","content"],"mappings":"iQAkKmCA,GAAA,IAAMC,KAAmB,eAEpDC,EAAA,CACJC,MAAO,yBACPC,KAAM,CACF,CAAEC,IAAK,cAAeC,KAAM,cAAeC,QAAS,2DACpD,CAAED,KAAM,WAAYC,QAAS"}
