@@ -8,7 +8,6 @@ export default defineNuxtConfig({
       publicDir: '.output/public'
     },
     prerender: {
-      fallback: true,
       crawlLinks: true,     // Add this to prerender linked pages
       routes: ['/']         // Add this to ensure root is prerendered
     }

@@ -345,6 +345,11 @@ export async function fetchFilterByName() {
 }
 
 export async function fetchGames() {
+  // Skip games API calls during prerendering (games should be client-side only)
+  if (process.server && process.env.NITRO_PRERENDER) {
+    console.log('🎮 GAMES: Skipping games fetch during prerendering');
+    return;
+  }
 
   try {
     // 1. Check cache FIRST (before Worker call)
