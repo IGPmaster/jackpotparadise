@@ -82,19 +82,19 @@
 <script setup>
 import { ref, onMounted, defineEmits } from 'vue';
 const loading = ref(true);
-import { newGames, msgTranslate, loadLang, regLink, loginLink } from '~/composables/globalData';
+import { newGames, msgTranslate, loadLang, regLink, loginLink, fetchGames } from '~/composables/globalData';
 
 const emit = defineEmits(['loaded']);
 
-onMounted(async () => {
-    try {
-        await fetchGames();
-        await loadLang();
-    } catch (error) {
-        console.error('Error fetching promotions:', error);
-    } finally {
-        loading.value = false;
-        emit('loaded');
-    }
+// Single call for both SSR and client
+await useAsyncData('newgames-data', async () => {
+    await loadLang();
+    await fetchGames(); // ✅ Only call needed
+});
+
+onMounted(() => {
+    // No API call, just UI state
+    loading.value = false;
+    emit('loaded');
 });
 </script>

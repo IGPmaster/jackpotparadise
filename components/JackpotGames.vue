@@ -78,28 +78,20 @@
 import { ref, onMounted, defineEmits } from 'vue';
 const loading = ref(true);
 
-import { jackpotGames, msgTranslate, loadLang, regLink, loginLink } from '~/composables/globalData';
+import { jackpotGames, msgTranslate, loadLang, regLink, loginLink, fetchGames } from '~/composables/globalData';
 
 const emit = defineEmits(['loaded']);
 
-onMounted(async () => {
-	try {
-		await fetchGames();
-		loading.value = false;
-	} catch (error) {
-		console.error('Error fetching promotions:', error);
-	}
-	loading.value = false;
-	emit('loaded');
+// Single call for both SSR and client
+await useAsyncData('jackpotgames-data', async () => {
+    await loadLang();
+    await fetchGames(); // ✅ Only call needed
 });
 
-// Add async data loading
-await useAsyncData('translations', async () => {
-	try {
-		await loadLang();
-	} catch (error) {
-		console.error('Error loading translations:', error);
-	}
+onMounted(() => {
+    // No API call, just UI state
+    loading.value = false;
+    emit('loaded');
 });
 
 </script>

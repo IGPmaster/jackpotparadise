@@ -4,4 +4,4 @@ node_modules
 .nitro
 .cache
 .env
-.DS_Store
+.DS_Store.output/

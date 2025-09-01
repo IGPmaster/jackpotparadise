@@ -19,33 +19,32 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { ref } from 'vue';
-import { msgTranslate, loadLang, globalContent, loadTranslations } from '~/composables/globalData';
+import { msgTranslate, loadLang, globalContent, loadTranslations, fetchCachedContent, PP_API_URL, WHITELABEL_ID, lang } from '~/composables/globalData';
 
 const route = useRoute();
 const slug = route.params.slug;
 
 async function fetchContent(slug) {
     try {
-        const response = await fetch(
-            `${PP_API_URL}GetInfoContentByCode?whitelabelId=${WHITELABEL_ID}&country=${lang.value}&code=${slug}`
-            //`http://content.progressplay.net/api23/api/InfoContent?whitelabelId=&country=en&Code=${slug}`
-        );
-        const data = await response.json();
-        return data[0].Html; // Return the Html content instead of updating the ref
+        // Use the unified cached content function with CloudFlare Worker proxy
+        return await fetchCachedContent(slug, lang.value);
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching compliance content:', error);
+        return '';
     }
 }
 
 const htmlContent = ref('');
 
-(async () => {
-    htmlContent.value = await fetchContent(slug); // Set the htmlContent.value here
-    await loadTranslations();
-})();
+// Use proper async data loading
+await useAsyncData('compliance-content', async () => {
+    await loadLang(); // Ensure lang is loaded first
+    htmlContent.value = await fetchContent(slug);
+    return htmlContent.value;
+});
 
 const handleClick = async (key) => {
-    const code = updateCode(key, globalContent.value); // Use globalContent.value here
+    const code = globalContent[key] || key; // Simplified code lookup
     htmlContent.value = await fetchContent(code);
 };
 

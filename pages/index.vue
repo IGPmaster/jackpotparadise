@@ -56,6 +56,9 @@ import { promotionsPosts, regLink, fetchPromotions } from '~/composables/globalD
 
 const emit = defineEmits(['loaded']);
 
+// Import the fetchApiPromotions function
+import { fetchApiPromotions, pp_promotions } from '~/composables/globalData';
+
 const { fetch, error, $fetchState } = useFetch(async () => {
 	await fetchApiPromotions();
 });
