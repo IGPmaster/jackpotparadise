@@ -261,13 +261,6 @@ export async function loadTranslations() {
 }
 
 export async function fetchApiPromotions() {
-  // Skip promotions API calls during prerendering (promotions should be client-side only)
-  if (process.server && process.env.NITRO_PRERENDER) {
-    console.log('🎁 PROMOTIONS: Skipping promotions fetch during prerendering');
-    pp_promotions.value = []; // Set empty array to prevent undefined errors
-    return;
-  }
-
   try {
     console.log('🎁 UNIFIED: Starting fetchApiPromotions()');
     console.log('🔍 UNIFIED: lang.value =', lang.value);
@@ -352,13 +345,6 @@ export async function fetchFilterByName() {
 }
 
 export async function fetchGames() {
-  // Skip games API calls during prerendering (games should be client-side only)
-  if (process.server && process.env.NITRO_PRERENDER) {
-    console.log('🎮 GAMES: Skipping games fetch during prerendering');
-    games.value = []; // Set empty array to prevent undefined errors
-    return;
-  }
-
   try {
     // 1. Check cache FIRST (before Worker call)
     const now = Date.now();
