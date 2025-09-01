@@ -8,7 +8,7 @@ export default defineNuxtConfig({
       publicDir: '.output/public'
     },
     prerender: {
-      crawlLinks: true,     // Add this to prerender linked pages
+      crawlLinks: false,    // Disable crawling to prevent prerendering game URLs
       routes: ['/']         // Add this to ensure root is prerendered
     }
   },
